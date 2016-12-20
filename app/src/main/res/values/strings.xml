@@ -1,3 +1,18 @@
 <resources>
-    <string name="app_name">NetCalc</string>
+    <string name="roboto_medium">fonts/Roboto-Medium.ttf</string>
+    <string name="roboto_regular">fonts/Roboto-Regular.ttf</string>
+
+    <string name="app_name">IP calculator</string>
+    <string name="ip_address">IP address. For example: 192.168.0.1</string>
+    <string name="mask">Mask</string>
+    <string name="cidr_notation">CIDR notation</string>
+    <string name="wc_mask">Wildcard mask</string>
+    <string name="max_address">Maximum number of addresses</string>
+    <string name="address_range">Address range</string>
+    <string name="information_item">Information</string>
+    <string name="developer">Developer: A. Soloveva</string>
+    <string name="icon_developer_prefix">Icon made by</string>>
+    <string name="icon_developer_user">Freepik</string>
+    <string name="icon_developer_site">www.flaticon.com</string>
+    <string name="back_text">Back</string>
 </resources>

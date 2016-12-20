@@ -1,5 +1,6 @@
 package asolovyev.ru.netcalc;
 
+
 /**
  * Created by MinyayloAA on 29.07.2016.
  */
@@ -15,7 +16,7 @@ public class IpCalc {
     private int[] wcMasks = new int[4];
     private int[] bCastAdds = new int[4];
 
-    final int maskForMask = 0b11111111;
+    final int maskForMask = 0b11111111;  
 
     public IpCalc(String ipAddress, String mask){
         this.ipAddress = ipAddress;
@@ -25,14 +26,6 @@ public class IpCalc {
         FindSubnet();
         FindWildcardMask();
         FindBroadcastAdd();
-    }
-
-    public String TestSplit(){
-        String tst = "";
-        for (int ipA : ipAdds){
-            tst += ipA;
-        }
-        return tst;
     }
 
     public String IpAddress(){
@@ -55,7 +48,6 @@ public class IpCalc {
         return bCastAdd;
     }
 
-
     public void SetIp(String ipAddress){
         this.ipAddress = ipAddress;
         SplitIp(ipAdds, ipAddress);
@@ -69,6 +61,12 @@ public class IpCalc {
         FindSubnet();
         FindWildcardMask();
         FindBroadcastAdd();
+    }
+
+    public String NumberOfAdds(int slashMask){
+        int i = (int)(Math.pow(2, 32 - slashMask) - 2);
+        if (i < 0) i = 0;
+        return "" + i;
     }
 
     private void SplitIp(int[] ipObjects, String ipToSplit){

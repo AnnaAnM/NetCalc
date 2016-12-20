@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">IP калькулятор</string>
+    <string name="ip_address">IP адрес. Например: 192.168.0.1</string>
+    <string name="mask">Маска</string>
+    <string name="cidr_notation">Запись в бесклассовой адресации (CIDR)</string>
+    <string name="wc_mask">Обратная маска</string>
+    <string name="max_address">Максимальное количество адресов в сети</string>
+    <string name="address_range">Диапазон адресов</string>
+    <string name="information_item">Информация</string>
+    <string name="developer">Разработчик: А. Соловьева</string>
+    <string name="icon_developer_prefix">Иконка разработана</string>
+    <string name="icon_developer_user">Freepik</string>
+    <string name="icon_developer_site">www.flaticon.com</string>
+    <string name="back_text">Назад</string>
+</resources>
