@@ -1,4 +1,4 @@
-package asolovyev.ru.netcalc;
+package ru.asoloveva.netcalc;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

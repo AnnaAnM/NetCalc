@@ -1,8 +1,9 @@
-package asolovyev.ru.netcalc;
+package ru.asoloveva.netcalc;
 
 import android.app.Application;
 
 import com.crashlytics.android.Crashlytics;
+
 import io.fabric.sdk.android.Fabric;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 

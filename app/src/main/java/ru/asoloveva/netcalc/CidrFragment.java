@@ -1,12 +1,9 @@
-package asolovyev.ru.netcalc;
+package ru.asoloveva.netcalc;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -17,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
@@ -25,7 +21,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.regex.Pattern;
-
 
 public class CidrFragment extends android.support.v4.app.Fragment {
     private static final String KEY_IP = "key_ip";

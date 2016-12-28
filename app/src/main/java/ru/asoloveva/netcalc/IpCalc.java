@@ -1,4 +1,4 @@
-package asolovyev.ru.netcalc;
+package ru.asoloveva.netcalc;
 
 
 /**
