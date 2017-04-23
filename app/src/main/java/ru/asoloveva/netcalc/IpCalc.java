@@ -52,6 +52,7 @@ public class IpCalc {
         this.ipAddress = ipAddress;
         SplitIp(ipAdds, ipAddress);
         FindSubnet();
+        FindWildcardMask();
         FindBroadcastAdd();
     }
 

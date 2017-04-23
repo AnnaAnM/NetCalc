@@ -168,7 +168,7 @@ public class CidrFragment extends android.support.v4.app.Fragment {
                 if (isIp) {
                     ip.SetIp(ipTextInputEditText.getText().toString());
                     cidrTextView.setText(ip.IpAddress() + "/" + maskSeekBar.getProgress());
-                    addRangeTextView.setText(ip.IpAddress() + " - " + ip.BroadcastAddress());
+                    addRangeTextView.setText(ip.SubnetAddress() + " - " + ip.BroadcastAddress());
                 }
             }
 
