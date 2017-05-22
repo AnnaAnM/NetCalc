@@ -202,7 +202,6 @@ public class CidrFragment extends android.support.v4.app.Fragment {
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case R.id.menu_item_information:
-                // TODO: вызов фрагмента
                 callbacks.onInfSelected();
                 return true;
             default:
