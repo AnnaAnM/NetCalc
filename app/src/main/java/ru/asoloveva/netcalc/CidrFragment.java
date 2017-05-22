@@ -68,6 +68,7 @@ public class CidrFragment extends android.support.v4.app.Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        setRetainInstance(true);
     }
 
     @Override
@@ -190,6 +191,7 @@ public class CidrFragment extends android.support.v4.app.Fragment {
 
     @Override
     public void onDetach(){
+        callbacks = null;
         super.onDetach();
         //callbacks = null;
     }
