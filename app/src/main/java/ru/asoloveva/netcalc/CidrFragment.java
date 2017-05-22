@@ -54,8 +54,7 @@ public class CidrFragment extends android.support.v4.app.Fragment {
     private boolean isIp;
 
     static CidrFragment newInstance() {
-        CidrFragment cidrFragment = new CidrFragment();
-        return cidrFragment;
+        return new CidrFragment();
     }
 
     @Override
@@ -80,8 +79,6 @@ public class CidrFragment extends android.support.v4.app.Fragment {
         background = (ScrollView) view.findViewById(R.id.background);
         background.setBackgroundColor(Color.WHITE);
 
-
-        //ipEditText = (EditText) view.findViewById(R.id.ipEditText);
         ipTextInputEditText = (TextInputEditText) view.findViewById(R.id.ipTextInputEditText);
         maskSpinner = (Spinner) view.findViewById(R.id.maskSpinner);
         maskTextView = (TextView) view.findViewById(R.id.maskTextView);
@@ -91,7 +88,6 @@ public class CidrFragment extends android.support.v4.app.Fragment {
         maskSeekBar = (SeekBar) view.findViewById(R.id.maskSeekBar);
         maxAddTextView = (TextView) view.findViewById(R.id.maxAddTextView);
 
-        // TODO: дописать, когда будет не лень
         final String[] masks = {"0.0.0.0", "128.0.0.0", "192.0.0.0", "224.0.0.0", "240.0.0.0",
                 "248.0.0.0", "252.0.0.0", "254.0.0.0", "255.0.0.0", "255.128.0.0",
                 "255.192.0.0", "255.224.0.0", "255.240.0.0", "255.248.0.0",
@@ -102,7 +98,8 @@ public class CidrFragment extends android.support.v4.app.Fragment {
                 "255.255.255.248", "255.255.255.252", "255.255.255.254", "255.255.255.255"};
 
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, masks);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(),
+                android.R.layout.simple_spinner_item, masks);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         maskSpinner.setAdapter(arrayAdapter);
 

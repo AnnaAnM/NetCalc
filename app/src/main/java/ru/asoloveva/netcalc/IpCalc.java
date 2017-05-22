@@ -1,9 +1,5 @@
 package ru.asoloveva.netcalc;
 
-
-/**
- * Created by MinyayloAA on 29.07.2016.
- */
 public class IpCalc {
     private String ipAddress;
     private String mask;
@@ -16,7 +12,7 @@ public class IpCalc {
     private int[] wcMasks = new int[4];
     private int[] bCastAdds = new int[4];
 
-    final int maskForMask = 0b11111111;  
+    private final int maskForMask = 0b11111111;
 
     public IpCalc(String ipAddress, String mask){
         this.ipAddress = ipAddress;
@@ -30,10 +26,6 @@ public class IpCalc {
 
     public String IpAddress(){
         return ipAddress;
-    }
-
-    public String Mask(){
-        return mask;
     }
 
     public String SubnetAddress(){
@@ -79,38 +71,45 @@ public class IpCalc {
     }
 
     private void FindSubnet(){
-        subnetAdd = "";
+        StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < subnet.length; i++){
             subnet[i] = ipAdds[i] & masks[i] & maskForMask;
-            subnetAdd += subnet[i];
+            sb.append(subnet[i]);
             if (i < subnet.length - 1){
-                subnetAdd += ".";
+                //subnetAdd += ".";
+                sb.append(".");
             }
         }
+
+        subnetAdd = sb.toString();
     }
 
     private void FindWildcardMask() {
-        wildcardMask = "";
+        StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < wcMasks.length; i++){
             wcMasks[i] = (~masks[i]) & maskForMask;
-            wildcardMask += wcMasks[i];
+            sb.append(wcMasks[i]);
             if (i < wcMasks.length - 1){
-                wildcardMask += ".";
+                sb.append(".");
             }
         }
+
+        wildcardMask = sb.toString();
     }
 
     private void FindBroadcastAdd(){
-        bCastAdd = "";
+        StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < bCastAdds.length; i++){
             bCastAdds[i] = subnet[i] | wcMasks[i];
-            bCastAdd += bCastAdds[i];
+            sb.append(bCastAdds[i]);
             if (i < bCastAdds.length - 1){
-                bCastAdd += ".";
+                sb.append(".");
             }
         }
+
+        bCastAdd = sb.toString();
     }
 }

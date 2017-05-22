@@ -11,8 +11,7 @@
     <string name="address_range">Address range</string>
     <string name="information_item">Information</string>
     <string name="developer">Developer: A. Soloveva</string>
-    <string name="icon_developer_prefix">Icon made by</string>>
+    <string name="icon_developer_prefix">Icon made by</string>
     <string name="icon_developer_user">Freepik</string>
     <string name="icon_developer_site">www.flaticon.com</string>
-    <string name="back_text">Back</string>
 </resources>

@@ -46,8 +46,10 @@
             style="@style/PlaneText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:paddingRight="16dp" />
+            android:layout_gravity="end"
+            android:paddingEnd="16dp"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp" />
 
         <SeekBar
             android:id="@+id/maskSeekBar"
