@@ -23,4 +23,5 @@
         android:textAlignment="center"
         android:textSize="22sp"
         android:gravity="center" />
+
 </LinearLayout>

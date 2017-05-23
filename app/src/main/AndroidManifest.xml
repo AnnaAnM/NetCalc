@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="ru.asoloveva.netcalc">
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="ru.asoloveva.netcalc.CalculatorApp"
         android:allowBackup="false"
@@ -11,7 +13,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name="ru.asoloveva.netcalc.MainActivity"
+            android:name="ru.asoloveva.netcalc.feature.MainActivity"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,4 +26,5 @@
             android:name="io.fabric.ApiKey"
             android:value="655f4f8b99a7e5834f8852e4e5d5b495ef508134" />
     </application>
+
 </manifest>

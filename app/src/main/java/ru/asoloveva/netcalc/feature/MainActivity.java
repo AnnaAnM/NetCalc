@@ -1,4 +1,4 @@
-package ru.asoloveva.netcalc;
+package ru.asoloveva.netcalc.feature;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -6,9 +6,20 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import ru.asoloveva.netcalc.R;
+import ru.asoloveva.netcalc.feature.calculation.CidrFragment;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class MainActivity extends AppCompatActivity implements CidrFragment.Callbacks {
+public class MainActivity extends AppCompatActivity implements Navigable {
+
+    @Override
+    public void addFragment(Fragment fragment) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -26,15 +37,5 @@ public class MainActivity extends AppCompatActivity implements CidrFragment.Call
             fragment = CidrFragment.newInstance();
             fragmentManager.beginTransaction().add(R.id.fragment_container, fragment).commit();
         }
-    }
-
-    @Override
-    public void onInfSelected() {
-        Fragment fragment = new InformationFragment();
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit();
     }
 }

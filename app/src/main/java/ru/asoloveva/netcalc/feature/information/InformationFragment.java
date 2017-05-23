@@ -1,4 +1,4 @@
-package ru.asoloveva.netcalc;
+package ru.asoloveva.netcalc.feature.information;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -13,7 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import ru.asoloveva.netcalc.R;
+
 public class InformationFragment extends Fragment {
+    public static InformationFragment newInstance() {
+        return new InformationFragment();
+    }
+
     private TextView developerTextView;
 
     @Override

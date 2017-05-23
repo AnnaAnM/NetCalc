@@ -1,7 +1,6 @@
-package ru.asoloveva.netcalc;
+package ru.asoloveva.netcalc.feature.calculation;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.text.Editable;
@@ -14,20 +13,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.regex.Pattern;
 
-public class CidrFragment extends android.support.v4.app.Fragment {
-    private static final String KEY_IP = "key_ip";
-    private static final String KEY_MASK = "key_mask";
+import ru.asoloveva.netcalc.R;
+import ru.asoloveva.netcalc.feature.Navigable;
+import ru.asoloveva.netcalc.feature.information.InformationFragment;
 
-    private LinearLayout linearLayout;
-    private ScrollView background;
+public class CidrFragment extends android.support.v4.app.Fragment {
+    public static CidrFragment newInstance() {
+        return new CidrFragment();
+    }
+
+    private final String KEY_IP = "key_ip";
+    private final String KEY_MASK = "key_mask";
+
+    private final String IP_ADDRESS_PATTERN = "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+            "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+            "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+            "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
+
     private IpCalc ip;
     private TextInputEditText ipTextInputEditText;
     private TextView maskTextView;
@@ -37,30 +45,16 @@ public class CidrFragment extends android.support.v4.app.Fragment {
     private TextView addRangeTextView;
     private SeekBar maskSeekBar;
     private TextView maxAddTextView;
-    private Callbacks callbacks;
 
-    /**
-     * Обязательный интерфейс для активности-хоста
-     */
-    public interface Callbacks{
-        void onInfSelected();
-    }
+    private Navigable navigable;
 
-    private static final String IPADDRESS_PATTERN = "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
-            "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
-            "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
-            "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
-
-    private boolean isIp;
-
-    static CidrFragment newInstance() {
-        return new CidrFragment();
-    }
+    private boolean isValidIP;
 
     @Override
     public void onAttach(Context context){
         super.onAttach(context);
-        callbacks = (Callbacks) context;
+
+        navigable = (Navigable) getActivity();
     }
 
     @Override
@@ -71,13 +65,14 @@ public class CidrFragment extends android.support.v4.app.Fragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_menu, menu);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cidr, container, false);
-
-        linearLayout = (LinearLayout) view.findViewById(R.id.linearLayout);
-        linearLayout.setBackgroundColor(Color.WHITE);
-        background = (ScrollView) view.findViewById(R.id.background);
-        background.setBackgroundColor(Color.WHITE);
 
         ipTextInputEditText = (TextInputEditText) view.findViewById(R.id.ipTextInputEditText);
         maskSpinner = (Spinner) view.findViewById(R.id.maskSpinner);
@@ -119,11 +114,11 @@ public class CidrFragment extends android.support.v4.app.Fragment {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 maskTextView.setText("/" + progress);
                 maskSpinner.setSelection(progress);
-                ip.SetMask(masks[progress]);
-                cidrTextView.setText(ip.IpAddress() + "/" + progress);
-                wcMaskTextView.setText(ip.WildcardMask());
-                addRangeTextView.setText(ip.SubnetAddress() + " - " + ip.BroadcastAddress());
-                maxAddTextView.setText(ip.NumberOfAdds(progress));
+                ip.setMask(masks[progress]);
+                cidrTextView.setText(ip.getIpAddress() + "/" + progress);
+                wcMaskTextView.setText(ip.getWildcardMask());
+                addRangeTextView.setText(ip.getSubnetAddress() + " - " + ip.getBroadcastAddress());
+                maxAddTextView.setText(ip.getNumberOfAdds(progress));
 
             }
 
@@ -159,14 +154,14 @@ public class CidrFragment extends android.support.v4.app.Fragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String ipString = charSequence.toString();
-                isIp = Pattern.matches(IPADDRESS_PATTERN, ipString);
-                if (!isIp) {
+                isValidIP = Pattern.matches(IP_ADDRESS_PATTERN, ipString);
+                if (!isValidIP) {
                     ipTextInputEditText.setError("Wrong format of ip address");
                 }
-                if (isIp) {
-                    ip.SetIp(ipTextInputEditText.getText().toString());
-                    cidrTextView.setText(ip.IpAddress() + "/" + maskSeekBar.getProgress());
-                    addRangeTextView.setText(ip.SubnetAddress() + " - " + ip.BroadcastAddress());
+                if (isValidIP) {
+                    ip.setIp(ipTextInputEditText.getText().toString());
+                    cidrTextView.setText(ip.getIpAddress() + "/" + maskSeekBar.getProgress());
+                    addRangeTextView.setText(ip.getSubnetAddress() + " - " + ip.getBroadcastAddress());
                 }
             }
 
@@ -180,32 +175,26 @@ public class CidrFragment extends android.support.v4.app.Fragment {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString(KEY_IP, ipTextInputEditText.getText().toString());
-        outState.putInt(KEY_MASK, maskSpinner.getSelectedItemPosition());
-    }
-
-    @Override
     public void onDetach(){
-        callbacks = null;
+        navigable = null;
         super.onDetach();
-        //callbacks = null;
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater){
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.fragment_menu, menu);
-    }
-
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case R.id.menu_item_information:
-                callbacks.onInfSelected();
+                navigable.addFragment(InformationFragment.newInstance());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString(KEY_IP, ipTextInputEditText.getText().toString());
+        outState.putInt(KEY_MASK, maskSpinner.getSelectedItemPosition());
     }
 }
